@@ -1,8 +1,8 @@
 package rs.ac.bg.np.hospitalmanagement.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Hospital {
@@ -14,15 +14,28 @@ public class Hospital {
     private String address;
     private String city;
 
-    public Hospital(long hospitalId, String name, String address, String city) {
+    @OneToMany(mappedBy = "hospital")
+    private Set<MedicalSpecial> medicalSpecials;
+
+    public Hospital(long hospitalId, String name, String address, String city, Set<MedicalSpecial> medicalSpecials) {
         this.hospitalId = hospitalId;
         this.name = name;
         this.address = address;
         this.city = city;
+        this.medicalSpecials = medicalSpecials;
     }
 
     public Hospital() {
     }
+
+    public Set<MedicalSpecial> getMedicalSpecials() {
+        return medicalSpecials;
+    }
+
+    public void setMedicalSpecials(Set<MedicalSpecial> medicalSpecials) {
+        this.medicalSpecials = medicalSpecials;
+    }
+
 
     public long getHospitalId() {
         return hospitalId;
