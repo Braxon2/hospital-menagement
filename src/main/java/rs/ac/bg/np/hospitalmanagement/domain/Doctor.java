@@ -12,6 +12,8 @@ public class Doctor {
     @GeneratedValue
     private long docId;
     private String name;
+
+    private String licenceNumber;
     @ManyToOne//gotovo
     private MedicalSpecial medicalSpecial;
 
@@ -19,11 +21,20 @@ public class Doctor {
     @JsonIgnore
     private Set<Report> reports;
 
-    public Doctor(long docId, String name, MedicalSpecial medicalSpecial, Set<Report> reports) {
+    public Doctor(long docId, String name, String licenceNumber, MedicalSpecial medicalSpecial, Set<Report> reports) {
         this.docId = docId;
         this.name = name;
+        this.licenceNumber = licenceNumber;
         this.medicalSpecial = medicalSpecial;
         this.reports = reports;
+    }
+
+    public String getLicenceNumber() {
+        return licenceNumber;
+    }
+
+    public void setLicenceNumber(String licenceNumber) {
+        this.licenceNumber = licenceNumber;
     }
 
     public Doctor() {

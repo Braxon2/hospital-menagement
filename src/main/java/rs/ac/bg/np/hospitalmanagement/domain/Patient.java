@@ -14,18 +14,36 @@ public class Patient {
     private long pId;
     private String name;
     private Date bornDate;
+
+    private String jmbg;
     private String residence;
 
     @OneToMany(mappedBy = "patient")
     @JsonIgnore
     private List<Report> reports;
 
-    public Patient(long pId, String name, Date bornDate, String residence, List<Report> reports) {
+    public Patient(long pId, String name, Date bornDate, String jmbg, String residence, List<Report> reports) {
         this.pId = pId;
         this.name = name;
         this.bornDate = bornDate;
+        this.jmbg = jmbg;
         this.residence = residence;
         this.reports = reports;
+    }
+
+    public String getJmbg() {
+        return jmbg;
+    }
+
+    public void setJmbg(String jmbg) {
+        this.jmbg = jmbg;
+    }
+
+    public Patient(String name, Date bornDate, String jmbg, String residence) {
+        this.name = name;
+        this.bornDate = bornDate;
+        this.jmbg = jmbg;
+        this.residence = residence;
     }
 
     public Patient() {

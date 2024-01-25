@@ -6,4 +6,5 @@ import rs.ac.bg.np.hospitalmanagement.domain.Recipe;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe,Long> {
+
 }

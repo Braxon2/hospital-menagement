@@ -17,11 +17,37 @@ public class Diagnosis {
 
     private String name;
 
+    private long codeOfDiganosis;
+
+    private String label;
+
     @OneToMany(mappedBy = "diagnosis")
     @JsonIgnore
     private List<Report> reports;
 
     public Diagnosis() {
+    }
+
+    public Diagnosis(String name, long codeOfDiganosis,String label) {
+        this.name = name;
+        this.codeOfDiganosis = codeOfDiganosis;
+        this.label = label;
+    }
+
+    public long getCodeOfDiganosis() {
+        return codeOfDiganosis;
+    }
+
+    public void setCodeOfDiganosis(long codeOfDiganosis) {
+        this.codeOfDiganosis = codeOfDiganosis;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Diagnosis(long diaId, String name, List<Report> reports) {

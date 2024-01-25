@@ -1,5 +1,6 @@
 package rs.ac.bg.np.hospitalmanagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -15,6 +16,7 @@ public class MedicalSpecial {
     @ManyToOne//gotovo
     private Hospital hospital;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "medicalSpecial")
     private Set<Doctor> members;
 
@@ -22,6 +24,10 @@ public class MedicalSpecial {
         this.medSpecId = medSpecId;
         this.name = name;
         this.members = members;
+    }
+
+    public MedicalSpecial(String name){
+        this.name = name;
     }
 
     public MedicalSpecial() {
