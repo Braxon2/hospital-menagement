@@ -12,7 +12,7 @@ public class Recipe {
     @GeneratedValue
     private long recid;
 
-    private String dose;
+    private String doses;
 
     @OneToOne
     private Medicine medicine;
@@ -23,9 +23,9 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(long recid, String dose, Medicine medicine, Report report) {
+    public Recipe(long recid, String doses, Medicine medicine, Report report) {
         this.recid = recid;
-        this.dose = dose;
+        this.doses = doses;
         this.medicine = medicine;
         this.report = report;
     }
@@ -34,17 +34,18 @@ public class Recipe {
         return recid;
     }
 
+    public String getDoses() {
+        return doses;
+    }
+
+    public void setDoses(String doses) {
+        this.doses = doses;
+    }
+
     public void setRecid(long recid) {
         this.recid = recid;
     }
 
-    public String getdose() {
-        return dose;
-    }
-
-    public void setdose(String dose) {
-        this.dose = dose;
-    }
 
     public Medicine getMedicine() {
         return medicine;
