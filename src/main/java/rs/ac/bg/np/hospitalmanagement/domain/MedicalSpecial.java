@@ -112,4 +112,20 @@ public class MedicalSpecial {
     public void setMembers(Set<Doctor> members) {
         this.members = members;
     }
+    /**
+     * Vraca bolnicu u kojoj se nalazi kadar
+     *
+     * @return hospital kao bolnica u kojoj se nalazi
+     */
+    public Hospital getHospital() {
+        return hospital;
+    }
+    /**
+     *Postavlja hospotal na zadatu vrednost
+     *
+     * @param hospital bolnica u kojoj ce se nalaziti
+     */
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
 }

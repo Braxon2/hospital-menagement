@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entitet u bazi podataka / domenska klasa dijagnoze.
@@ -154,4 +155,6 @@ public class Diagnosis {
     public void setReports(List<Report> reports) {
         this.reports = reports;
     }
+
+
 }

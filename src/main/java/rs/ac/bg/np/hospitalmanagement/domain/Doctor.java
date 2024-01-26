@@ -28,7 +28,7 @@ public class Doctor {
      */
     private String name;
     /**
-     * Broj licnence koji je tipa String
+     * Broj licnence koji je tipa String i duzine 6
      */
     private String licenceNumber;
     /**
