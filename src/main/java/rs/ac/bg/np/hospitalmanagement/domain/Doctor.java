@@ -70,9 +70,14 @@ public class Doctor {
      *Postavlja licenceNumber na zadatu vrednost
      *
      * @param  licenceNumber kao broj licence
+     * @throws IllegalArgumentException ako je licneca null,prazan string ili duzina karaktera licence nije jednak 6
      */
     public void setLicenceNumber(String licenceNumber) {
-        this.licenceNumber = licenceNumber;
+        if((licenceNumber != null && !licenceNumber.isEmpty()) && licenceNumber.length() == 6) {
+            this.licenceNumber = licenceNumber;
+        }else{
+            throw new IllegalArgumentException("Broj licence ne sme biti null niti prazan string i duzina licence mora biti jedna 6!");
+        }
     }
     /**
      * Bez parametarski konstruktor koji inicijalizuje objekat klase Doctor
@@ -91,9 +96,14 @@ public class Doctor {
      *Postavlja docid na zadatu vrednost
      *
      * @param  docId kao id doktora
+     * @throws IllegalArgumentException ako je id doktora 0 ili manje od 0
      */
     public void setDocId(long docId) {
-        this.docId = docId;
+        if(docId > 0) {
+            this.docId = docId;
+        }else{
+            throw new IllegalArgumentException("Id doktora ne sme biti nula ili manje od nule!");
+        }
     }
     /**
      * Vraca ime doktora
@@ -107,9 +117,14 @@ public class Doctor {
      *Postavlja name na zadatu vrednost
      *
      * @param  name kao ime doktora
+     * @throws IllegalArgumentException ako je ime doktora null ili prazan string
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Ime doktora ne sme biti null niti prazan string!");
+        }
     }
     /**
      * Vraca kadar doktora
@@ -123,9 +138,14 @@ public class Doctor {
      *Postavlja medicalSpecial na zadatu vrednost
      *
      * @param  medicalSpecial kao kadar doktora
+     * @throws IllegalArgumentException ako je medicalSpecial null
      */
     public void setMedicalSpecial(MedicalSpecial medicalSpecial) {
-        this.medicalSpecial = medicalSpecial;
+        if(medicalSpecial != null) {
+            this.medicalSpecial = medicalSpecial;
+        }else{
+            throw new IllegalArgumentException("MedicalSpecial ne sme biti null!!!");
+        }
     }
     /**
      * Vraca skup izvestaja koji je doktor napisao

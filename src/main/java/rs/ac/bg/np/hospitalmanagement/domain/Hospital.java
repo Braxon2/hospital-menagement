@@ -91,25 +91,36 @@ public class Hospital {
      *Postavlja hospitalId na zadatu vrednost
      *
      * @param hospitalId Id bolnice
+     *@throws IllegalArgumentException ako je hospitalId manje ili jednako od nule
      */
     public void setHospitalId(long hospitalId) {
-        this.hospitalId = hospitalId;
+        if(hospitalId > 0) {
+            this.hospitalId = hospitalId;
+        }else{
+            throw new IllegalArgumentException("Hospital Id ne sme biti nula ili manje od nule!");
+        }
     }
     /**
      * Vraca naziv bolnice
      *
      * @return name kao String
+     *
      */
     public String getName() {
-        return name;
+            return name;
     }
     /**
      * Postavlja naziv bolnice na zadatu vrednost
      *
      * @param name naziv bolnice
+     *@throws IllegalArgumentException ako je ime bolnice null ili prazan string
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Ime doktora ne sme biti null niti prazan string!");
+        }
     }
     /**
      * Vraca adresu bolnice
@@ -123,9 +134,14 @@ public class Hospital {
      * Postavlja adresu bolnice na zadatu vrednost
      *
      * @param  address adresa bolnice
+     * @throws IllegalArgumentException ako je adresa null ili prazan string
      */
     public void setAddress(String address) {
-        this.address = address;
+        if(address != null && !address.isEmpty()) {
+            this.address = address;
+        }else{
+            throw new IllegalArgumentException("Addres ne sme biti null ili prazan String!");
+        }
     }
     /**
      *Vraca grad u kome se nalazi bolnica
@@ -139,8 +155,13 @@ public class Hospital {
      * Postavlja grad na zadatu vrednost
      *
      * @param city grad u kome se nalazi bolnica
+     * @throws IllegalArgumentException ako je city null ili prazan string
      */
     public void setCity(String city) {
+        if(city != null && !city.isEmpty()){
         this.city = city;
+        }else{
+            throw new IllegalArgumentException("City ne sme biti null ili prazan String!");
+        }
     }
 }
