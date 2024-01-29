@@ -74,9 +74,14 @@ public class Diagnosis {
      *Postavlja codeOfDiagnosis na zadatu vrednost
      *
      * @param  codeOfDiganosis kao kod za dijagnozu
+     * @throws IllegalArgumentException ako je kod za dijagnozu manji od 10000 ili veci od 999
      */
     public void setCodeOfDiganosis(long codeOfDiganosis) {
-        this.codeOfDiganosis = codeOfDiganosis;
+        if(codeOfDiganosis > 999 && codeOfDiganosis < 10000) {
+            this.codeOfDiganosis = codeOfDiganosis;
+        }else {
+            throw new IllegalArgumentException("CodeOfDiagnosis must be greater than 99!");
+        }
     }
     /**
      * Vraca sifru dijagnoze
@@ -90,9 +95,15 @@ public class Diagnosis {
      *Postavlja label na zadatu vrednost
      *
      * @param  label kao sifru za dijagnozu
+     * @throws IllegalArgumentException ako je sifra dijagnoze prazan string ili ako duzina nije jednaka 5 karaktera i
+     * ako ne krece velikim pocetnim slvoom
      */
     public void setLabel(String label) {
-        this.label = label;
+        if(label != null && !label.isEmpty() && (label.charAt(0) >= 'A' && label.charAt(0)<='Z') && label.length()==5) {
+            this.label = label;
+        }else{
+            throw new IllegalArgumentException("Sifra dijagnoze ne sme biti null ili prazan string, mora da krene sa velikim slovom i da mu je duzina 5!");
+        }
     }
     /**
      * Konstruktor koji inicijalizuje objekat klase Diagnosis sa zadatim vrednostima
@@ -118,9 +129,14 @@ public class Diagnosis {
      *Postavlja diaId na zadatu vrednost
      *
      * @param  diaId kao id kadra
+     * @throws IllegalArgumentException ako je Id dijagnoze manji ili jednak nuli
      */
     public void setDiaId(long diaId) {
-        this.diaId = diaId;
+        if(diaId>0) {
+            this.diaId = diaId;
+        }else{
+            throw new IllegalArgumentException("Id dijagnoze mora biti veci od 0!!!");
+        }
     }
 
     /**
@@ -135,9 +151,14 @@ public class Diagnosis {
      *Postavlja name na zadatu vrednost
      *
      * @param  name kao naziv dijagnoze
+     *
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Naziv dijagnoze ne sme biti null ili prazan string!!!");
+        }
     }
     /**
      * Vraca ID medicinskog specijaliste tj kadra
