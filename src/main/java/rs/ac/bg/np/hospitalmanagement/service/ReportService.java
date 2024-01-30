@@ -15,25 +15,59 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Sadrzi poslovnu logiku sa radom sa izjavom
+ *
+ * Klasa sluzi da manipulise, upravlja sa modelom i podacima vezanim sa izjavom
+ * Omogucava pravljenje izjava, vracanje svih izjava iz baze kao i pojedinacnu izjavu,
+ * vracanje svih izjave koje je napisao jedan lekar
+ * i vracanje svih izjave koje jedan pacijent ima
+ *
+ * @author Dusan
+ */
 @Service
 public class ReportService {
 
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli Report
+     */
     @Autowired
     private ReportRepository reportRepository;
 
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli Doctor
+     */
     @Autowired
     private DoctorRepository doctorRepository;
 
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli Patient
+     */
     @Autowired
     private PatientRepository patientRepository;
 
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli Diagnosis
+     */
     @Autowired
     private DiagnosisRepository diagnosisRepository;
 
+    /**
+     * Ova metoda vraca listu svih izjava
+     *
+     * @return listu svih izjave iz baze
+     */
     public List<Report> getAll() {
         return reportRepository.findAll();
     }
 
+    /**
+     * Ova metoda vraca jednu izjavu sa prosledjenim id-jem
+     *
+     * @param repid id izjave koju cemo vratiti
+     * @return izjavu iz baze sa prosledjenim id-jem
+     * @throws Exception ukoliko u bazi ne posotoji ta izjava sa prosledjenim id-jem
+     */
     public Report getReport(long repid) throws Exception {
         Optional<Report> optionalReport = reportRepository.findById(repid);
 
@@ -45,6 +79,16 @@ public class ReportService {
 
     }
 
+    /**
+     * Ova metoda sluzi za pravljenje izjave od strane lekara
+     *
+     * @param docid id lekara koji pise izjavu
+     * @param report izjava koja se popunjava
+     * @param pid id pacijenta za koga je vezana ova izjava
+     * @param did id dijagnoze koje ce se upotrebiti za ovu izjavu
+     * @return perzistirana izjava
+     * @throws Exception ukoliko u bazi ne posotji pacijent,doktor  ili dijagnoza sa prosledjenim id-jem
+     */
     public Report doctorNewReport(long docid, Report report, long pid, long did) throws Exception {
 
         Optional<Doctor> optionalDoctor = doctorRepository.findById(docid);
@@ -91,6 +135,13 @@ public class ReportService {
 
     }
 
+    /**
+     * Ova metoda vraca sve izjave koje je napisao jedan lekar
+     *
+     * @param docid id lekara koji je pisao izjave
+     * @return skup izjava koje je pisao taj lekar
+     * @throws Exception ukoliko ne posotji lekar u bazi sa prosledjenim id-jem
+     */
     public Set<Report> getAllReportsFromDoctor(long docid) throws Exception {
 
         Optional<Doctor> optionalDoctor = doctorRepository.findById(docid);
@@ -105,6 +156,13 @@ public class ReportService {
 
     }
 
+    /**
+     * Ova metoda vraca skup izjava koja pripada tom pacijentu
+     *
+     * @param pid id pacijenta koji ima te izjave
+     * @return skup izjava koje pripadaju tom pacijentu
+     * @throws Exception akopacijent ne postoji u bazi sa prosledjenim id-jem
+     */
     public Set<Report> getAllReportsFromPatient(long pid) throws Exception {
 
         Optional<Patient> optionalPatient = patientRepository.findById(pid);

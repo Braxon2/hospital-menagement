@@ -10,13 +10,26 @@ import rs.ac.bg.np.hospitalmanagement.repository.MedicalSpecialRepository;
 
 import java.util.*;
 
+/**
+ * Sadrzi poslovnu logiku sa radom sa medicinskom specijalizacijom tj kadrom
+ *
+ * Klasa sluzi da manipulise, upravlja sa modelom i podacima vezanim sa medicinskom specijalizacijom tj kadrom
+ * Omogucava povezivanje kadra sa bolnicom, vracanje svih kadrova kao i doktora iz odredjenog kadra i nalazenje doktora iz odredjenog kadra
+ *
+ * @author Dusan
+ */
 @Service
 public class MedicalServiceService {
 
-
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli MedicalSpecial
+     */
     @Autowired
     private MedicalSpecialRepository medicalSpecialRepository;
 
+    /**
+     * Broker baze podataka koji je posrednik ka tabeli Hospital
+     */
     @Autowired
     private HospitalRepository hospitalRepository;
 
@@ -34,6 +47,14 @@ public class MedicalServiceService {
 
     }
 
+    /**
+     *Ova metoda sluzi da poveze medicisku specijalizaciju za bolnicu
+     *
+     * @param msid id mediciske specijalizacije koju hocemo da povezemo za bolnicu
+     * @param hid id bolnice
+     * @return Medicinsku specijalizaciju koji je povezan sa bolnicom
+     * @throws Exception ako ID bolnice ili kadra nije validan tj da ne postoje u bazi
+     */
     public MedicalSpecial connect(long msid, long hid) throws Exception {
 
         Optional<Hospital> optHos = hospitalRepository.findById(hid);
@@ -64,10 +85,22 @@ public class MedicalServiceService {
     }
 
 
+    /**
+     *Ova metoda vraca sve medicinske specijaliste
+     *
+     * @return listu medicinskih specijalista iz baze
+     */
     public List<MedicalSpecial> getAll() {
         return medicalSpecialRepository.findAll();
     }
 
+    /**
+     *Ova metoda nam vraca sve doktore iz odredjenog kadra
+     *
+     * @param msid id kadra tj mediciske spicjalnosti
+     * @return vraca nam skup doktora koji pripadaju tom kadru
+     * @throws Exception ukoliko taj kadar ne postoji u bazi
+     */
     public Set<Doctor> getAllDoctors(long msid) throws Exception {
         Optional<MedicalSpecial> optMedSpec = medicalSpecialRepository.findById(msid);
 
@@ -81,10 +114,14 @@ public class MedicalServiceService {
 
     }
 
-
-
-
-
+    /**
+     * Ova metoda nam vraca lekara iz odredjenog kadra
+     *
+     * @param msid id kadra u kojem se nalazi lekar
+     * @param did id lekara kojeg trazimo
+     * @return  lekara koji pripada tom kadru  ili null ukoliko ne posotji lekar u tom kadru
+     * @throws Exception ako kadar sa prosledjenim id-jem ne posotji u bazi
+     */
     public Doctor findDoctor(long msid, long did) throws Exception {
 
         Optional<MedicalSpecial> optionalMedicalSpecial = medicalSpecialRepository.findById(msid);
