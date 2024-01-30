@@ -56,12 +56,12 @@ public class Patient {
      * @param reports skup izvestaja koje pacijent ima
      */
     public Patient(long pId, String name, Date bornDate, String jmbg, String residence, List<Report> reports) {
-        this.pId = pId;
-        this.name = name;
-        this.bornDate = bornDate;
-        this.jmbg = jmbg;
-        this.residence = residence;
-        this.reports = reports;
+        setpId(pId);
+        setName(name);
+        setBornDate(bornDate);
+        setJmbg(jmbg);
+        setResidence(residence);
+        setReports(reports);
     }
     /**
      * Vraca jmbg pacijenta
@@ -75,9 +75,14 @@ public class Patient {
      *Postavlja jmbg na zadatu vrednost
      *
      * @param  jmbg kao jmbg pacijenta
+     * @throws IllegalArgumentException ako je Jmbg  null ili prazan string  ili duzina nije 13
      */
     public void setJmbg(String jmbg) {
-        this.jmbg = jmbg;
+        if((jmbg != null && !jmbg.isEmpty()) && jmbg.length() == 13) {
+            this.jmbg = jmbg;
+        }else{
+            throw new IllegalArgumentException("Jmbg ne sme biti null niti prazan string  i duzina mora biti 13");
+        }
     }
     /**
      * Konstruktor koji inicijalizuje objekat klase Doctor sa zadatim vrednostima
@@ -88,10 +93,10 @@ public class Patient {
      * @param residence rezidencija pacijenta
      */
     public Patient(String name, Date bornDate, String jmbg, String residence) {
-        this.name = name;
-        this.bornDate = bornDate;
-        this.jmbg = jmbg;
-        this.residence = residence;
+        setName(name);
+        setBornDate(bornDate);
+        setJmbg(jmbg);
+        setResidence(residence);
     }
     /**
      * Bez parametarski konstruktor koji inicijalizuje objekat klase Patient
@@ -110,9 +115,14 @@ public class Patient {
      *Postavlja pid na zadatu vrednost
      *
      * @param  pId kao id pacijenta
+     * @throws IllegalArgumentException ako je id manje ili jednak nuli
      */
     public void setpId(long pId) {
+        if(pId>0){
         this.pId = pId;
+        }else {
+            throw new IllegalArgumentException("Id pacijenta ne sme biti manje ili jednak nuli!");
+        }
     }
     /**
      * Vraca ime pacijenta
@@ -126,9 +136,14 @@ public class Patient {
      *Postavlja name na zadatu vrednost
      *
      * @param  name kao ime pacijenta
+     * @throws IllegalArgumentException ako je ime pacijenta null ili prazan string
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Ime doktora ne sme biti null niti prazan string!");
+        }
     }
     /**
      * Vraca datum rodjenja pacijenta
@@ -142,9 +157,14 @@ public class Patient {
      *Postavlja bornDate na zadatu vrednost
      *
      * @param  bornDate kao datum rodjenja pacijenta
+     * @throws IllegalArgumentException ako je bornDate null
      */
     public void setBornDate(Date bornDate) {
-        this.bornDate = bornDate;
+        if(bornDate != null) {
+            this.bornDate = bornDate;
+        }else{
+            throw new IllegalArgumentException("Datum rodjenja ne sme biti null");
+        }
     }
     /**
      * Vraca rezidenciju pacijenta
@@ -158,9 +178,14 @@ public class Patient {
      *Postavlja residence na zadatu vrednost
      *
      * @param  residence kao mesto rezidencije pacijenta
+     * @throws IllegalArgumentException ako je rezidencija null ili prazan String
      */
     public void setResidence(String residence) {
-        this.residence = residence;
+        if(residence != null && !residence.isEmpty()) {
+            this.residence = residence;
+        }else{
+            throw new IllegalArgumentException("Rezidencija ne sme biti null niti prazan String");
+        }
     }
     /**
      * Vraca listu izvestaja koji taj pacijent ima

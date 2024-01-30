@@ -58,9 +58,9 @@ public class Diagnosis {
      * @param label sifra dijagnoze
      */
     public Diagnosis(String name, long codeOfDiganosis,String label) {
-        this.name = name;
-        this.codeOfDiganosis = codeOfDiganosis;
-        this.label = label;
+        setName(name);
+        setCodeOfDiganosis(codeOfDiganosis);
+        setLabel(label);
     }
     /**
      * Vraca kod dijagnoze
@@ -113,9 +113,9 @@ public class Diagnosis {
      * @param reports lista izvestaja
      */
     public Diagnosis(long diaId, String name, List<Report> reports) {
-        this.diaId = diaId;
-        this.name = name;
-        this.reports = reports;
+        setDiaId(diaId);
+        setName(name);
+        setReports(reports);
     }
     /**
      * Vraca ID id dijagnoze

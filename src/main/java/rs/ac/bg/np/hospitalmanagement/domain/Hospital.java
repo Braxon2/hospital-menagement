@@ -50,11 +50,11 @@ public class Hospital {
      * @param medicalSpecials skup kadrova bolnice
      */
     public Hospital(long hospitalId, String name, String address, String city, Set<MedicalSpecial> medicalSpecials) {
-        this.hospitalId = hospitalId;
-        this.name = name;
-        this.address = address;
-        this.city = city;
-        this.medicalSpecials = medicalSpecials;
+        setHospitalId(hospitalId);
+        setName(name);
+        setAddress(address);
+        setCity(city);
+        setMedicalSpecials(medicalSpecials);
     }
 
     /**

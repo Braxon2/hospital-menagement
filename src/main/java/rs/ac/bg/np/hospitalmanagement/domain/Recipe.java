@@ -50,10 +50,10 @@ public class Recipe {
      * @param report izjava iz koje potice
      */
     public Recipe(long recid, String doses, Medicine medicine, Report report) {
-        this.recid = recid;
-        this.doses = doses;
-        this.medicine = medicine;
-        this.report = report;
+        setRecid(recid);
+        setDoses(doses);
+        setMedicine(medicine);
+        setReport(report);
     }
     /**
      * Vraca id recepta
@@ -75,17 +75,27 @@ public class Recipe {
      *Postavlja doses na zadatu vrednost
      *
      * @param  doses kao upsutvo za doziranje
+     * @throws IllegalArgumentException ako je doza null ili prazan string
      */
     public void setDoses(String doses) {
-        this.doses = doses;
+        if(doses != null && !doses.isEmpty()) {
+            this.doses = doses;
+        }else{
+            throw new IllegalArgumentException("Doza ne sme biti null niti prazan string");
+        }
     }
     /**
      *Postavlja recid na zadatu vrednost
      *
      * @param  recid kao id za recept
+     * @throws IllegalArgumentException ako je id manji ili jednak nuli
      */
     public void setRecid(long recid) {
-        this.recid = recid;
+        if(recid>0) {
+            this.recid = recid;
+        }else {
+            throw new IllegalArgumentException("Id recepta treba da bude veci od 0");
+        }
     }
 
     /**
@@ -100,9 +110,14 @@ public class Recipe {
      *Postavlja medicine na zadatu vrednost
      *
      * @param  medicine kao lek koji ce se prepisati
+     * @throws IllegalArgumentException ako je medicine null
      */
     public void setMedicine(Medicine medicine) {
-        this.medicine = medicine;
+        if(medicine != null) {
+            this.medicine = medicine;
+        }else{
+            throw new IllegalArgumentException("Medicine ne moze biti null!");
+        }
     }
     /**
      * Vraca izvestaj

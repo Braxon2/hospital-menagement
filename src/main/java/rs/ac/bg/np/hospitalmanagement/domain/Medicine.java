@@ -34,9 +34,9 @@ public class Medicine {
      * @param weightPerPill tezina po piluli
      */
     public Medicine(long medId, String name, int weightPerPill) {
-        this.medId = medId;
-        this.name = name;
-        this.weightPerPill = weightPerPill;
+        setMedId(medId);
+        setName(name);
+        setWeightPerPill(weightPerPill);
     }
     /**
      * Bez parametarski konstruktor koji inicijalizuje objekat klase Medicine
@@ -56,9 +56,14 @@ public class Medicine {
      *Postavlja medId na zadatu vrednost
      *
      * @param  medId kao id za lek
+     * @throws IllegalArgumentException ako je id manje ili jednak nuli
      */
     public void setMedId(long medId) {
-        this.medId = medId;
+        if(medId > 0) {
+            this.medId = medId;
+        }else{
+            throw new IllegalArgumentException("Medicine Id ne sme biti manje ili jednako nula!");
+        }
     }
     /**
      * Vraca naziv leka
@@ -72,9 +77,14 @@ public class Medicine {
      *Postavlja name na zadatu vrednost
      *
      * @param  name kao naziv za lek
+     * @throws IllegalArgumentException ako je ime leka null ili prazan string
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Ime leka ne sme biti null niti prazan string!");
+        }
     }
     /**
      * Vraca tezinu  po piluli
@@ -88,8 +98,13 @@ public class Medicine {
      *Postavlja weightPerPill na zadatu vrednost
      *
      * @param  weightPerPill kao tezina leka po piluli
+     * @throws IllegalArgumentException ako je weightPerPill manje ili jednak nuli
      */
     public void setWeightPerPill(int weightPerPill) {
-        this.weightPerPill = weightPerPill;
+        if(weightPerPill > 0) {
+            this.weightPerPill = weightPerPill;
+        }else{
+            throw new IllegalArgumentException("weightPerPill ne sme biti manje ili jednak nuli");
+        }
     }
 }

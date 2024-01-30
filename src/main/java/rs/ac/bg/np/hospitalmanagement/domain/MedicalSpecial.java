@@ -46,9 +46,9 @@ public class MedicalSpecial {
      * @param members clanovi tj lekari tog kadra
      */
     public MedicalSpecial(long medSpecId, String name, Set<Doctor> members) {
-        this.medSpecId = medSpecId;
-        this.name = name;
-        this.members = members;
+        setMedSpecId(medSpecId);
+        setName(name);
+        setMembers(members);
     }
     /**
      * Konstruktor koji inicijalizuje objekat klase MedicalSpecial sa zadatim vrednostima
@@ -56,7 +56,7 @@ public class MedicalSpecial {
      * @param name naziv kadra
      */
     public MedicalSpecial(String name){
-        this.name = name;
+        setName(name);
     }
     /**
      * Bez parametarski konstruktor koji inicijalizuje objekat klase MedicalSpecial
@@ -75,9 +75,14 @@ public class MedicalSpecial {
      *Postavlja medSpecId na zadatu vrednost
      *
      * @param medSpecId Id kadra
+     * @throws IllegalArgumentException ako je id manje ili jednako nula
      */
     public void setMedSpecId(long medSpecId) {
-        this.medSpecId = medSpecId;
+        if(medSpecId > 0) {
+            this.medSpecId = medSpecId;
+        }else{
+            throw new IllegalArgumentException("MedicalSpecial Id ne sme biti manje ili jednako nule!");
+        }
     }
 
     /**
@@ -92,9 +97,14 @@ public class MedicalSpecial {
      *Postavlja name na zadatu vrednost
      *
      * @param name naziv kadra
+     * @throws IllegalArgumentException ime kadra ne sme biti null ili prazan String
      */
     public void setName(String name) {
-        this.name = name;
+        if(name != null && !name.isEmpty()) {
+            this.name = name;
+        }else{
+            throw new IllegalArgumentException("Ime kadra ne sme biti null niti prazan string!");
+        }
     }
     /**
      * Vraca lekare koji pripadaju tom kadru

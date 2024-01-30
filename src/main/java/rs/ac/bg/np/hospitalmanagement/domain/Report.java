@@ -58,12 +58,12 @@ public class Report {
      * @param clinicalFinding klicnki nalaz koji vrsi lekar
      */
     public Report(long repid, String description, Patient patient, Diagnosis diagnosis, Doctor doctor, String clinicalFinding) {
-        this.repid = repid;
-        this.description = description;
-        this.patient = patient;
-        this.diagnosis = diagnosis;
-        this.doctor = doctor;
-        this.clinicalFinding = clinicalFinding;
+        setRepid(repid);
+        setDescription(description);
+        setPatient(patient);
+        setDiagnosis(diagnosis);
+        setDoctor(doctor);
+        setClinicalFinding(clinicalFinding);
     }
     /**
      * Bez parametarski konstruktor koji inicijalizuje objekat klase Report
@@ -82,9 +82,14 @@ public class Report {
      *Postavlja repid na zadatu vrednost
      *
      * @param  repid kao id izvestaja
+     * @throws IllegalArgumentException ako je id manje ili jednak nuli
      */
     public void setRepid(long repid) {
-        this.repid = repid;
+        if(repid>0) {
+            this.repid = repid;
+        }else{
+            throw new IllegalArgumentException("Id izjave ne sme biti manje ili jednak nuli");
+        }
     }
     /**
      * Vraca opis probelema
@@ -98,9 +103,14 @@ public class Report {
      *Postavlja description na zadatu vrednost
      *
      * @param  description kao opis problema
+     * @throws IllegalArgumentException ako je opis null ili prazan string
      */
     public void setDescription(String description) {
-        this.description = description;
+        if(description != null && !description.isEmpty()) {
+            this.description = description;
+        }else{
+            throw new IllegalArgumentException("Opis problema ne sme biti null ili prazan string");
+        }
     }
     /**
      * Vraca pacijenta
@@ -165,6 +175,10 @@ public class Report {
      * @param  clinicalFinding kao klinicki nalaz
      */
     public void setClinicalFinding(String clinicalFinding) {
+        if(clinicalFinding!= null && !clinicalFinding.isEmpty()){
         this.clinicalFinding = clinicalFinding;
+        }else{
+            throw new IllegalArgumentException("Klinicki nalaz ne sme biti null ili prazan string!");
+        }
     }
 }

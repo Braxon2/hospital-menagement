@@ -52,11 +52,11 @@ public class Doctor {
      * @param reports skup izvestaja koje je on prepisao
      */
     public Doctor(long docId, String name, String licenceNumber, MedicalSpecial medicalSpecial, Set<Report> reports) {
-        this.docId = docId;
-        this.name = name;
-        this.licenceNumber = licenceNumber;
-        this.medicalSpecial = medicalSpecial;
-        this.reports = reports;
+        setDocId(docId);
+        setName(name);
+        setLicenceNumber(licenceNumber);
+        setMedicalSpecial(medicalSpecial);
+        setReports(reports);
     }
     /**
      * Vraca broj licence doktora
