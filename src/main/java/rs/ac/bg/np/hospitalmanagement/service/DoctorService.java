@@ -22,6 +22,7 @@ import java.util.Optional;
 @Service
 public class DoctorService {
 
+
     /**
      * Broker baze podataka koji je posrednik ka tabeli Docotor
      */
@@ -98,5 +99,5 @@ public class DoctorService {
 
     }
 
-
+//change
 }
