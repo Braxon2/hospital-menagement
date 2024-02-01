@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 /**
  * Entitet u bazi podataka / domenska klasa izvestaja.
  *
@@ -180,5 +182,43 @@ public class Report {
         }else{
             throw new IllegalArgumentException("Klinicki nalaz ne sme biti null ili prazan string!");
         }
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa izvestaja kao String
+     */
+    @Override
+    public String toString() {
+        return "Report{" +
+                "repid=" + repid +
+                ", description='" + description + '\'' +
+                ", patient=" + patient +
+                ", diagnosis=" + diagnosis +
+                ", doctor=" + doctor +
+                ", clinicalFinding='" + clinicalFinding + '\'' +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta izvestaja
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Report report = (Report) o;
+        return repid == report.repid && description.equals(report.description) && Objects.equals(patient, report.patient) && Objects.equals(diagnosis, report.diagnosis) && Objects.equals(doctor, report.doctor) && clinicalFinding.equals(report.clinicalFinding);
+    }
+
+    /**
+     * Vraca hash code vrdnost izvestaja
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(repid, description, patient, diagnosis, doctor, clinicalFinding);
     }
 }

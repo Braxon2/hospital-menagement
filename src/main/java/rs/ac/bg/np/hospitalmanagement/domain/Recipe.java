@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+import java.util.Objects;
+
 /**
  * Entitet u bazi podataka / domenska klasa recepta.
  *
@@ -134,6 +136,41 @@ public class Recipe {
      */
     public void setReport(Report report) {
         this.report = report;
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa recepta kao String
+     */
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recid=" + recid +
+                ", doses='" + doses + '\'' +
+                ", medicine=" + medicine +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta recepta
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return recid == recipe.recid && doses.equals(recipe.doses) && medicine.equals(recipe.medicine) && report.equals(recipe.report);
+    }
+
+    /**
+     * Vraca hash code vrdnost recepta
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(recid, doses, medicine);
     }
 
     //    private Doctor approvedByDoctor;
