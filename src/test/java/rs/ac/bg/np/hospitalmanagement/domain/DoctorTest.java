@@ -33,9 +33,30 @@ class DoctorTest {
     }
 
     @Test
+    void setDocIdZero(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setDocId(0L));
+    }
+
+    @Test
+    void setDocIdNegative(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setDocId(-5L));
+    }
+
+
+    @Test
     void setName(){
         doctor.setName("Zoran Radmilovic");
         assertEquals("Zoran Radmilovic",doctor.getName());
+    }
+
+    @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setName(""));
     }
 
     @Test
@@ -45,9 +66,25 @@ class DoctorTest {
     }
 
     @Test
+    void setLicenceNumberEmpty(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setLicenceNumber(""));
+    }
+
+    @Test
+    void setLicenceNumberNull(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setLicenceNumber(null));
+    }
+
+
+    @Test
     void checkLength(){
         doctor.setLicenceNumber("123456");
         assertEquals(6,doctor.getLicenceNumber().length());
+    }
+
+    @Test
+    void checkLengthInvalid(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setLicenceNumber("12345678"));
     }
 
     @Test
@@ -59,7 +96,7 @@ class DoctorTest {
     @Test
     void setReports(){
         Set<Report> reports = new HashSet<>();
-        reports.add(new Report(1L,null,null,null,null,null));
+        reports.add(new Report(1L,"sas",null,null,null,"asasas"));
         doctor.setReports(reports);
         assertEquals(reports,doctor.getReports());
     }

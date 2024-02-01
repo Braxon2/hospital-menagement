@@ -30,9 +30,29 @@ class RecipeTest {
     }
 
     @Test
+    void setDosesNull() {
+        assertThrows(IllegalArgumentException.class,()->recipe.setDoses(null));
+    }
+
+    @Test
+    void setDosesEmpty() {
+        assertThrows(IllegalArgumentException.class,()->recipe.setDoses(""));
+    }
+
+    @Test
     void setRecid() {
         recipe.setRecid(1L);
         assertEquals(1L,recipe.getRecid());
+    }
+
+    @Test
+    void setRecidZero() {
+        assertThrows(IllegalArgumentException.class,()->recipe.setRecid(0L));
+    }
+
+    @Test
+    void setRecidNegative() {
+        assertThrows(IllegalArgumentException.class,()->recipe.setRecid(-5L));
     }
 
     @Test
@@ -40,6 +60,11 @@ class RecipeTest {
         Medicine med = new Medicine(1L,"Brufen",10);
         recipe.setMedicine(med);
         assertEquals(med,recipe.getMedicine());
+    }
+
+    @Test
+    void setMedicineNull() {
+        assertThrows(IllegalArgumentException.class,()->recipe.setMedicine(null));
     }
 
     @Test

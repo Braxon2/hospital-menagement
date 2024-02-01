@@ -33,9 +33,29 @@ class PatientTest {
     }
 
     @Test
+    void setIdZero(){
+        assertThrows(IllegalArgumentException.class,()->patient.setpId(0L));
+    }
+
+    @Test
+    void setIdNegative(){
+        assertThrows(IllegalArgumentException.class,()->patient.setpId(-5L));
+    }
+
+    @Test
     void setName(){
         patient.setName("Slavko Petronijevic");
         assertEquals("Slavko Petronijevic",patient.getName());
+    }
+
+    @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->patient.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->patient.setName(""));
     }
 
     @Test
@@ -45,24 +65,54 @@ class PatientTest {
     }
 
     @Test
+    void setbornDateNull(){
+        assertThrows(IllegalArgumentException.class,()-> patient.setBornDate(null));
+    }
+
+    @Test
     void setResidence(){
         patient.setResidence("Beograd");
         assertEquals("Beograd",patient.getResidence());
     }
 
     @Test
+    void setResidenceNull(){
+        assertThrows(IllegalArgumentException.class,()->patient.setResidence(null));
+    }
+
+    @Test
+    void setResidenceEmpty(){
+        assertThrows(IllegalArgumentException.class,()->patient.setResidence(""));
+    }
+
+    @Test
     void setReports(){
         List<Report> reports = new ArrayList<>();
-        reports.add(new Report(1L,null,null,null,null,null));
-        reports.add(new Report(2L,null,null,null,null,null));
+        reports.add(new Report(1L,"sa",null,null,null,"asas"));
+        reports.add(new Report(2L,"snodaks",null,null,null,"oksds"));
         patient.setReports(reports);
         assertEquals(reports,patient.getReports());
     }
 
     @Test
     void setJmbg() {
-        patient.setJmbg("12344567891011");
-        assertEquals("12344567891011",patient.getJmbg());
+        patient.setJmbg("1234567891011");
+        assertEquals("1234567891011",patient.getJmbg());
+    }
+
+    @Test
+    void setJmbgNull() {
+        assertThrows(IllegalArgumentException.class,()->patient.setJmbg(null));
+    }
+
+    @Test
+    void setJmbgEmpty() {
+        assertThrows(IllegalArgumentException.class,()->patient.setJmbg(""));
+    }
+
+    @Test
+    void setJmbgLengthInvalid() {
+        assertThrows(IllegalArgumentException.class,()->patient.setJmbg("123"));
     }
 
     @ParameterizedTest
