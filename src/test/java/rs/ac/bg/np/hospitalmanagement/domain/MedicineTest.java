@@ -28,15 +28,40 @@ class MedicineTest {
     }
 
     @Test
+    void setIdMedicineInvalidNegative(){
+        assertThrows(IllegalArgumentException.class,()->medicine.setMedId(-3L));
+    }
+
+    @Test
+    void setIdMedicineInvalidZero(){
+        assertThrows(IllegalArgumentException.class,()->medicine.setMedId(0L));
+    }
+
+    @Test
     void setName(){
         medicine.setName("Pancef");
         assertEquals("Pancef",medicine.getName());
     }
 
     @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->medicine.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->medicine.setName(""));
+    }
+
+    @Test
     void setWeightPerPill(){
         medicine.setWeightPerPill(10);
         assertEquals(10,medicine.getWeightPerPill());
+    }
+
+    @Test
+    void setWeightPerPillZeroOrLess(){
+        assertThrows(IllegalArgumentException.class,()->medicine.setWeightPerPill(0));
     }
 
 }

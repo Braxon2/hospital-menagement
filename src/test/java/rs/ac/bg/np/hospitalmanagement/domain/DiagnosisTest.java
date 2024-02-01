@@ -34,17 +34,41 @@ class DiagnosisTest {
     }
 
     @Test
+    void setIdDiaException(){
+        assertThrows(IllegalArgumentException.class,()->diagnosis.setDiaId(0L));
+    }
+
+    @Test
+    void setIdDiaNegative(){
+        assertThrows(IllegalArgumentException.class,()->diagnosis.setDiaId(-4L));
+    }
+
+    @Test
     void setName(){
         diagnosis.setName("Laringitis");
         assertEquals("Laringitis",diagnosis.getName());
     }
 
     @Test
-    void setCodeOfDiagnosis(){
-        diagnosis.setCodeOfDiganosis(123L);
-        assertEquals(123L,diagnosis.getCodeOfDiganosis());
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->diagnosis.setName(null));
     }
 
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->diagnosis.setName(""));
+    }
+
+    @Test
+    void setCodeOfDiagnosis(){
+        diagnosis.setCodeOfDiganosis(1230L);
+        assertEquals(1230L,diagnosis.getCodeOfDiganosis());
+    }
+
+    @Test
+    void setCodeOfDiagnosisOutOfBound(){
+        assertThrows(IllegalArgumentException.class,()-> diagnosis.setCodeOfDiganosis(120L));
+    }
     @Test
     void setLabel(){
         diagnosis.setLabel("H0101");
@@ -52,9 +76,29 @@ class DiagnosisTest {
     }
 
     @Test
+    void setLabelNull(){
+        assertThrows(IllegalArgumentException.class,()-> diagnosis.setLabel(null));
+    }
+
+    @Test
+    void setLabelEmpty(){
+        assertThrows(IllegalArgumentException.class,()-> diagnosis.setLabel(""));
+    }
+
+    @Test
+    void setLabelNotUpperFirstLetter(){
+        assertThrows(IllegalArgumentException.class,()-> diagnosis.setLabel("h0234"));
+    }
+
+    @Test
+    void setLabelLength(){
+        assertThrows(IllegalArgumentException.class,()-> diagnosis.setLabel("H0234555"));
+    }
+
+    @Test
     void setReports(){
         List<Report> reports = new ArrayList<>();
-        reports.add(new Report(1L,null,null,null,null,null));
+        reports.add(new Report(1L,"asas",null,null,null,"sasasas"));
         diagnosis.setReports(reports);
         assertEquals(reports,diagnosis.getReports());
     }

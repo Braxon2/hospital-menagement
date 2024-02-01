@@ -30,9 +30,29 @@ class HospitalTest {
     }
 
     @Test
+    void setIdHospitalInvalidIdZero(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setHospitalId(0L));
+    }
+
+    @Test
+    void setIdHospitalInvalidIdNegative(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setHospitalId(-5L));
+    }
+
+    @Test
     void setName(){
         hospital.setName("Narodni Front");
         assertEquals("Narodni Front",hospital.getName());
+    }
+
+    @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setName(""));
     }
 
     @Test
@@ -42,9 +62,29 @@ class HospitalTest {
     }
 
     @Test
+    void setAddressNull(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setAddress(null));
+    }
+
+    @Test
+    void setAddressEmpty(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setAddress(""));
+    }
+
+    @Test
     void setCity(){
         hospital.setCity("Beograd");
         assertEquals("Beograd",hospital.getCity());
+    }
+
+    @Test
+    void setCityNull(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setCity(null));
+    }
+
+    @Test
+    void setCityEmpty(){
+        assertThrows(IllegalArgumentException.class,()->hospital.setCity(""));
     }
 
     @Test
