@@ -3,6 +3,7 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -137,5 +138,39 @@ public class MedicalSpecial {
      */
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa kadra kao String
+     */
+    @Override
+    public String toString() {
+        return "MedicalSpecial{" +
+                "medSpecId=" + medSpecId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta kadra
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MedicalSpecial that = (MedicalSpecial) o;
+        return medSpecId == that.medSpecId && name.equals(that.name);
+    }
+
+    /**
+     * Vraca hash code vrdnost kadra
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(medSpecId, name);
     }
 }

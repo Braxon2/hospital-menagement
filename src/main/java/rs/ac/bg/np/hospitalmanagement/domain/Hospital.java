@@ -168,7 +168,7 @@ public class Hospital {
 
     /**
      * ToString metoda
-     * @return Vrednost atributa doktora kao String
+     * @return Vrednost atributa bolnice kao String
      */
     @Override
     public String toString() {
