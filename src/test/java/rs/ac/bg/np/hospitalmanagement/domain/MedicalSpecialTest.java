@@ -33,9 +33,29 @@ class MedicalSpecialTest {
     }
 
     @Test
+    void setMedSpecIdZero(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setMedSpecId(0L));
+    }
+
+    @Test
+    void setMedSpecIdNegative(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setMedSpecId(-5L));
+    }
+
+    @Test
     void setName(){
         medicalSpecial.setName("ORL");
         assertEquals("ORL",medicalSpecial.getName());
+    }
+
+    @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setName(""));
     }
 
     @Test
@@ -58,16 +78,37 @@ class MedicalSpecialTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1,ORL"
+            "1,ORL,null",
+            "2,xxx,null",
+            "3,zzz,null"
     })
-    void paramitreezedCOntructorName(long id, String name){
-        Set<Doctor> doctors = null;
-        MedicalSpecial ms = new MedicalSpecial(id,name,doctors);
-        medicalSpecial.setName(name);
-        medicalSpecial.setMembers(doctors);
-        medicalSpecial.setMedSpecId(id);
+    void paramitreezedCOntructorName(long id, String name,String membersData){
+        Set<Doctor> doctors = new HashSet<>();
+        Doctor doctor = new Doctor();
 
-        assertEquals(ms.getMedSpecId(), medicalSpecial.getMedSpecId());
+        Set<Doctor> result = membersData.equals("null")?null:doctors;
+
+        medicalSpecial = new MedicalSpecial(id,name,result);
+
+        assertEquals(id, medicalSpecial.getMedSpecId());
+        assertEquals(name,medicalSpecial.getName());
+        assertEquals(result,medicalSpecial.getMembers());
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "ORL",
+            "xxx",
+            "zzz"
+    })
+    void paramitreezedCOntructorName(String name){
+
+
+        medicalSpecial = new MedicalSpecial(name);
+
+        assertEquals(name,medicalSpecial.getName());
+
 
     }
 
