@@ -2,6 +2,7 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -163,5 +164,41 @@ public class Hospital {
         }else{
             throw new IllegalArgumentException("City ne sme biti null ili prazan String!");
         }
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa doktora kao String
+     */
+    @Override
+    public String toString() {
+        return "Hospital{" +
+                "hospitalId=" + hospitalId +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta bolnice
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hospital hospital = (Hospital) o;
+        return hospitalId == hospital.hospitalId && name.equals(hospital.name) && address.equals(hospital.address) && city.equals(hospital.city);
+    }
+
+    /**
+     * Vraca hash code vrdnost bolnice
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(hospitalId, name, address, city);
     }
 }
