@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +61,9 @@ class PatientTest {
     }
 
     @Test
-    void setbornDate(){
+    void setbornDate() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date bornDate = dateFormat.parse("2000-5-23");
         patient.setBornDate(new Date());
         assertEquals(new Date(),patient.getBornDate());
     }
@@ -117,27 +121,30 @@ class PatientTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, Slavko Petronijevic, 12345678910112,Beograd"
+            "1,Slavko,2000-01-01,1234567891011,Belgrade,null",
+            "2,Darko,1970-05-08,1236547891011,Belgrade,null",
+            "2,Goran,1965-09-09,3216547891011,Belgrade,null",
     })
-    void testParametrizedContructor(long id,String name,String jmbg,String residence){
+    void testParametrizedContructor(long id,String name,String date,String jmbg,String residence,String reports) throws ParseException {
 
-        Patient p1 = new Patient();
-        p1.setJmbg(jmbg);
-        p1.setpId(id);
-        p1.setResidence(residence);
-        p1.setName(name);
 
-        patient.setName(name);
-        patient.setJmbg(jmbg);
-        patient.setpId(id);
-        patient.setResidence(residence);
 
-        boolean tacno;
-        if(p1.getJmbg().equals(patient.getJmbg()) && p1.getpId() == patient.getpId()){
-            tacno = true;
-        }else tacno = false;
 
-        assertTrue(tacno);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<Report> fake = new ArrayList<>();
+
+        Date bornDate = dateFormat.parse(date);
+        List<Report> reports1 = reports.equals("null")?null:fake;
+
+        Patient p = new Patient(id,name,bornDate,jmbg,residence,reports1);
+
+        assertEquals(id,p.getpId());
+        assertEquals(name,p.getName());
+        assertEquals(jmbg,p.getJmbg());
+        assertEquals(residence,p.getResidence());
+        assertEquals(bornDate,p.getBornDate());
+        assertEquals(reports1,p.getReports());
+
 
     }
 
