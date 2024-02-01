@@ -177,5 +177,39 @@ public class Diagnosis {
         this.reports = reports;
     }
 
+    /**
+     * ToString metoda
+     * @return Vrednost atributa dijagnoze kao String
+     */
+    @Override
+    public String toString() {
+        return "Diagnosis{" +
+                "id=" + diaId +
+                ", name='" + name + '\'' +
+                ", codeOfDiagnosis='" + codeOfDiganosis + '\'' +
+                ", label= "+label+
+                '}';
+    }
 
+    /**
+     * Poredi dva objekta dijagnoze
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Diagnosis diagnosis = (Diagnosis) o;
+        return diaId == diagnosis.diaId && codeOfDiganosis == diagnosis.codeOfDiganosis && name.equals(diagnosis.name) && label.equals(diagnosis.label);
+    }
+
+    /**
+     * Vraca hash code vrdnost dijagnoze
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(diaId, name, codeOfDiganosis, label);
+    }
 }
