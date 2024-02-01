@@ -3,6 +3,7 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -162,5 +163,43 @@ public class Doctor {
      */
     public void setReports(Set<Report> reports) {
         this.reports = reports;
+    }
+
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa doktora kao String
+     */
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "docId=" + docId +
+                ", name='" + name + '\'' +
+                ", licenceNumber='" + licenceNumber + '\'' +
+                ", medicalSpecial=" + medicalSpecial +
+                ", reports=" + reports +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta doktora
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Doctor doctor = (Doctor) o;
+        return docId == doctor.docId && name.equals(doctor.name) && licenceNumber.equals(doctor.licenceNumber) && medicalSpecial.equals(doctor.medicalSpecial);
+    }
+
+    /**
+     * Vraca hash code vrdnost doktora
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(docId, name, licenceNumber, medicalSpecial);
     }
 }
