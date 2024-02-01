@@ -3,6 +3,8 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,4 +66,19 @@ class MedicineTest {
         assertThrows(IllegalArgumentException.class,()->medicine.setWeightPerPill(0));
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1,Pancef,10",
+            "2,Panklav,20",
+            "3,Brufen,30"
+    })
+    void testConstructor(long id, String name, int weightPerPill){
+
+        medicine = new Medicine(id,name,weightPerPill);
+
+        assertEquals(id,medicine.getMedId());
+        assertEquals(name,medicine.getName());
+        assertEquals(weightPerPill,medicine.getWeightPerPill());
+
+    }
 }

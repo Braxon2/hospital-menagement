@@ -2,13 +2,15 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,6 +96,11 @@ class DoctorTest {
     }
 
     @Test
+    void setMedicalSpecialFail(){
+        assertThrows(IllegalArgumentException.class,()->doctor.setMedicalSpecial(null));
+    }
+
+    @Test
     void setReports(){
         Set<Report> reports = new HashSet<>();
         reports.add(new Report(1L,"sas",null,null,null,"asasas"));
@@ -101,6 +108,43 @@ class DoctorTest {
         assertEquals(reports,doctor.getReports());
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1,Slavko,123456,1;ORL;null,null",
+            "2,Darko,654321,2;Stomtatologija;null,null",
+            "3,Goran,123987,3;xyz;null,null",
+    })
+    void testParametrizedContructor(long id,String name,String licenceNumber,String medicalSpecial,String reports) throws ParseException {
+
+
+//        Doctor(long docId, String name, String licenceNumber, MedicalSpecial medicalSpecial, Set<Report> reports)
+
+        Set<Report> fake = new HashSet<>();
+        MedicalSpecial ms = new MedicalSpecial();
+        Set<Report> reports1 = reports.equals("null")?null:fake;
+
+        Doctor dr1 = new Doctor();
+        Set<Doctor> setDocros = new HashSet<>();
+        setDocros.add(dr1);
+
+        String[] dataMedicalSpecial = medicalSpecial.split(";");
+        ms.setMedSpecId(Long.parseLong(dataMedicalSpecial[0]));
+        ms.setName(dataMedicalSpecial[1]);
+        ms.setMembers(dataMedicalSpecial[2].equals("null")?null:setDocros);
+
+//        MedicalSpecial medSPec = medicalSpecial.equals("null")?null:ms;
+        Doctor doctor = new Doctor(id,name,licenceNumber,ms,reports1);
+
+
+        assertEquals(id,doctor.getDocId());
+        assertEquals(name,doctor.getName());
+        assertEquals(licenceNumber,doctor.getLicenceNumber());
+        assertEquals(ms,doctor.getMedicalSpecial());
+        assertEquals(reports1,doctor.getReports());
+
+
+
+    }
 
 
 }

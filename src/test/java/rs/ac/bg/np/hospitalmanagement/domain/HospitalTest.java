@@ -3,6 +3,8 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -94,6 +96,28 @@ class HospitalTest {
         specials.add(new MedicalSpecial(2L,"Dermatolog",null));
         hospital.setMedicalSpecials(specials);
         assertEquals(specials,hospital.getMedicalSpecials());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,Narodni,Beograd,Grad,null",
+            "2,xxx,yyy,zzz,null",
+    })
+    void testParametrizedConstructor(Long id,String name,String addrres,String city,String medical){
+
+        MedicalSpecial ms = new MedicalSpecial();
+        MedicalSpecial finalMedspec = medical.equals("null")?null:ms;
+        Set<MedicalSpecial> sets = new HashSet<>();
+        sets.add(finalMedspec);
+
+        hospital = new Hospital(id,name,addrres,city,sets);
+
+        assertEquals(id,hospital.getHospitalId());
+        assertEquals(name,hospital.getName());
+        assertEquals(city,hospital.getCity());
+        assertEquals(addrres,hospital.getAddress());
+        assertEquals(sets,hospital.getMedicalSpecials());
+
     }
 
 }

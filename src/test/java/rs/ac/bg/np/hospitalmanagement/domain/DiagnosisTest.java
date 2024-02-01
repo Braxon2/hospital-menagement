@@ -117,25 +117,24 @@ class DiagnosisTest {
     }
 
 
-   /* @ParameterizedTest
+    @ParameterizedTest
     @CsvSource({
-            "1,Laringitis,",
+            "1,Laringitis,null",
             "2,Katarakta,null",
             "3,Laringitis,null"
     })
-    void testParametrizedContructorSecond(long id,String name,List<Report> reports){
+    void testParametrizedContructorSecond(long id,String name,String reports){
 //        Report(long repid, String description, Patient patient, Diagnosis diagnosis, Doctor doctor, String clinicalFinding) {
-        List<Report> reportList = covertReportDataToList();
-
-        diagnosis = new Diagnosis(id,name,reports);
+        List<Report> reportList = new ArrayList<>();
+        List<Report> result = reports.equals("null")?null:reportList;
+//        reportList = reports.equals("null")?null:reportList;
+        diagnosis = new Diagnosis(id,name,result);
         assertEquals(name, diagnosis.getName());
         assertEquals(id, diagnosis.getDiaId());
-        assertEquals(reports, diagnosis.getReports());
+        assertEquals(result, diagnosis.getReports());
     }
 
-    private List<Report> covertReportDataToList() {
 
-    }*/
 
 
 }
