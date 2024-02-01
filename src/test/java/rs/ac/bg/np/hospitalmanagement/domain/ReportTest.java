@@ -29,9 +29,29 @@ class ReportTest {
     }
 
     @Test
+    void setRepidZero(){
+        assertThrows(IllegalArgumentException.class,()->report.setRepid(0L));
+    }
+
+    @Test
+    void setRepidNegative(){
+        assertThrows(IllegalArgumentException.class,()->report.setRepid(-5L));
+    }
+
+    @Test
     void setDescription() {
         report.setDescription("Nesto pise");
         assertEquals("Nesto pise",report.getDescription());
+    }
+
+    @Test
+    void setDescriptionNull() {
+        assertThrows(IllegalArgumentException.class,()->report.setDescription(null));
+    }
+
+    @Test
+    void setDescriptionEmpty() {
+        assertThrows(IllegalArgumentException.class,()->report.setDescription(""));
     }
 
     @Test
@@ -45,7 +65,7 @@ class ReportTest {
 
     @Test
     void setDiagnosis() {
-        Diagnosis diagnosis = new Diagnosis("Laringitis",123L,"H101");
+        Diagnosis diagnosis = new Diagnosis("Laringitis",1203L,"H0101");
         report.setDiagnosis(diagnosis);
         assertEquals(diagnosis,report.getDiagnosis());
     }
@@ -62,5 +82,15 @@ class ReportTest {
     void setClinicalFinding() {
         report.setClinicalFinding("Uradjen detaljan pregled");
         assertEquals("Uradjen detaljan pregled",report.getClinicalFinding());
+    }
+
+    @Test
+    void setClinicalFindingNull() {
+        assertThrows(IllegalArgumentException.class,()->report.setClinicalFinding(null));
+    }
+
+    @Test
+    void setClinicalFindingEmpty() {
+        assertThrows(IllegalArgumentException.class,()->report.setClinicalFinding(""));
     }
 }

@@ -33,9 +33,29 @@ class MedicalSpecialTest {
     }
 
     @Test
+    void setMedSpecIdZero(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setMedSpecId(0L));
+    }
+
+    @Test
+    void setMedSpecIdNegative(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setMedSpecId(-5L));
+    }
+
+    @Test
     void setName(){
         medicalSpecial.setName("ORL");
         assertEquals("ORL",medicalSpecial.getName());
+    }
+
+    @Test
+    void setNameNull(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setName(null));
+    }
+
+    @Test
+    void setNameEmpty(){
+        assertThrows(IllegalArgumentException.class,()->medicalSpecial.setName(""));
     }
 
     @Test
