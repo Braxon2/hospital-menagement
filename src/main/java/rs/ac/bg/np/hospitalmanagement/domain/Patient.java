@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Entitet u bazi podataka / domenska klasa pacijenta.
@@ -202,5 +203,42 @@ public class Patient {
      */
     public void setReports(List<Report> reports) {
         this.reports = reports;
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa pacijenta kao String
+     */
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "pId=" + pId +
+                ", name='" + name + '\'' +
+                ", bornDate=" + bornDate +
+                ", jmbg='" + jmbg + '\'' +
+                ", residence='" + residence + '\'' +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta pacijenta
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return pId == patient.pId && name.equals(patient.name) && bornDate.equals(patient.bornDate) && jmbg.equals(patient.jmbg) && residence.equals(patient.residence);
+    }
+
+    /**
+     * Vraca hash code vrdnost pacijenta
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(pId, name, bornDate, jmbg, residence);
     }
 }

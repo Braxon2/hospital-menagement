@@ -2,6 +2,8 @@ package rs.ac.bg.np.hospitalmanagement.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 /**
  * Entitet u bazi podataka / domenska klasa leka.
  *
@@ -106,5 +108,40 @@ public class Medicine {
         }else{
             throw new IllegalArgumentException("weightPerPill ne sme biti manje ili jednak nuli");
         }
+    }
+
+    /**
+     * ToString metoda
+     * @return Vrednost atributa leka kao String
+     */
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "medId=" + medId +
+                ", name='" + name + '\'' +
+                ", weightPerPill=" + weightPerPill +
+                '}';
+    }
+
+    /**
+     * Poredi dva objekta leka
+     * @param o objekat sa kojim se poredi
+     * @return true ako su objekti isti ili ako su im vrednost iste, obrnto false vraca
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Medicine medicine = (Medicine) o;
+        return medId == medicine.medId && weightPerPill == medicine.weightPerPill && name.equals(medicine.name);
+    }
+
+    /**
+     * Vraca hash code vrdnost leka
+     * @return int reprezentacija na osnovu svih atributa
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(medId, name, weightPerPill);
     }
 }
