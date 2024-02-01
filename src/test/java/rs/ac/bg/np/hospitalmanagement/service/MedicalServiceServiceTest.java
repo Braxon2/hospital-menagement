@@ -52,7 +52,8 @@ class MedicalServiceServiceTest {
 
         MedicalSpecial result = medicalServiceService.connect(medicalSpecial2.getMedSpecId(),hospital.getHospitalId());
 
-        verify(hospitalRepository,times(1)).findById(hospital.getHospitalId());
+        assertEquals(hospitalRepository.findById(hospital.getHospitalId()).get(),hospital);
+        verify(hospitalRepository,times(2)).findById(hospital.getHospitalId());
         verify(medicalSpecialRepository,times(1)).findById(medicalSpecial2.getMedSpecId());
         assertEquals(result,medicalSpecial2);
 
@@ -74,7 +75,7 @@ class MedicalServiceServiceTest {
         Mockito.when(hospitalRepository.findById(hospital.getHospitalId())).thenReturn(Optional.empty());
 
         Assertions.assertThrows(Exception.class,()->{
-            hospitalService.getOneHospital(hospital.getHospitalId());
+            medicalServiceService.connect(medicalSpecial2.getMedSpecId(),hospital.getHospitalId());
         });
 
 
@@ -90,6 +91,7 @@ class MedicalServiceServiceTest {
         specials.add(medicalSpecial2);
         hospital.setMedicalSpecials(specials);
 
+        Mockito.when(hospitalRepository.findById(hospital.getHospitalId())).thenReturn(Optional.of(hospital));
         Mockito.when(medicalSpecialRepository.findById(medicalSpecial2.getMedSpecId())).thenReturn(Optional.empty());
         Assertions.assertThrows(Exception.class,()->{
             medicalServiceService.connect(medicalSpecial2.getMedSpecId(),hospital.getHospitalId());
