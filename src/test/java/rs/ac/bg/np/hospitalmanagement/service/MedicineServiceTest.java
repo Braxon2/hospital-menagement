@@ -1,5 +1,6 @@
 package rs.ac.bg.np.hospitalmanagement.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -59,6 +60,22 @@ class MedicineServiceTest {
 
     }
 
+    @Test
+    void addNewMedicationException() {
+
+        Medicine medicine = new Medicine(104L,"Panklav",30);
+
+//        Mockito.when(medicineRepository.save(medicine)).thenReturn(medicine);
+        Mockito.when(medicineRepository.findByNameAndWeightPerPill(medicine.getName(),medicine.getWeightPerPill())).thenReturn(Optional.of(medicine));
+
+        Assertions.assertThrows(Exception.class,()->{
+           medicineService.addNewMedication(medicine);
+        });
+
+
+
+
+    }
 
     @Test
     void deleteMedicine() {
