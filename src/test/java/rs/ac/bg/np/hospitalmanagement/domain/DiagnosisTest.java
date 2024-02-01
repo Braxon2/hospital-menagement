@@ -105,24 +105,37 @@ class DiagnosisTest {
 
     @ParameterizedTest
     @CsvSource({
-            "Laringitis,123,H101, true"
+            "Laringitis,1230,H0101",
+            "Katarakta,1231,H0102",
+            "Laringitis,1232,H0103"
     })
     void testParametrizedContructor(String name,long code,String label){
-        Diagnosis d1 = new Diagnosis(name,code,label);
-        diagnosis.setLabel(label);
-        diagnosis.setName(name);
-        diagnosis.setCodeOfDiganosis(code);
-        boolean tacno;
-        if(d1.getLabel().equals(diagnosis.getLabel()) &&
-                d1.getName().equals(diagnosis.getName()) &&
-                d1.getCodeOfDiganosis() == diagnosis.getCodeOfDiganosis()
-        )   {
-            tacno = true;
-        }else tacno = false;
-
-        assertTrue(tacno);
+        diagnosis = new Diagnosis(name,code,label);
+        assertEquals(name, diagnosis.getName());
+        assertEquals(code, diagnosis.getCodeOfDiganosis());
+        assertEquals(label, diagnosis.getLabel());
     }
 
+
+   /* @ParameterizedTest
+    @CsvSource({
+            "1,Laringitis,",
+            "2,Katarakta,null",
+            "3,Laringitis,null"
+    })
+    void testParametrizedContructorSecond(long id,String name,List<Report> reports){
+//        Report(long repid, String description, Patient patient, Diagnosis diagnosis, Doctor doctor, String clinicalFinding) {
+        List<Report> reportList = covertReportDataToList();
+
+        diagnosis = new Diagnosis(id,name,reports);
+        assertEquals(name, diagnosis.getName());
+        assertEquals(id, diagnosis.getDiaId());
+        assertEquals(reports, diagnosis.getReports());
+    }
+
+    private List<Report> covertReportDataToList() {
+
+    }*/
 
 
 }
