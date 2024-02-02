@@ -134,7 +134,39 @@ class DiagnosisTest {
         assertEquals(result, diagnosis.getReports());
     }
 
+    @Test
+    void testToString(){
+        Diagnosis d1 = new Diagnosis("Laringitis",1230,"H0101");
+        assertTrue(d1.toString().contains("Laringitis"));
+        assertTrue(d1.toString().contains("1230"));
+        assertTrue(d1.toString().contains("H0101"));
+    }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1,Laringitis,1230,H0101,1,Laringitis,1230,H0101",
+            "1,Katarakta,1230,H0101,1,Katarakta,1230,H0101",
+            "3,Bol u glavi,1200,H0102,3,Bol u glavi,1200,H0102"
+    })
+    void testParamatrizedConstructor3(long id1,String name1,long code1,String label1,
+                    long id2,String name2,long code2,String label2){
+        diagnosis = new Diagnosis(id1,name1,code1,label1,null);
+        Diagnosis d1 = new Diagnosis(id2,name2,code2,label2,null);
+        assertEquals(diagnosis,d1);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,Laringitis,1230,H0101,1,Laringitis,1230,H0101, true",
+            "1,Laringitis,1230,H0101,2,Laringitis,1230,H0101, false",
+            "2,Katarakta,1231,H0102,3,Bol u glavi,1231,H0102,false"
+    })
+    void testEquals(long id1,String name1,long code1,String label1,
+                    long id2,String name2,long code2,String label2,boolean areEqual){
+        diagnosis = new Diagnosis(id1,name1,code1,label1,null);
+        Diagnosis d1 = new Diagnosis(id2,name2,code2,label2,null);
+        assertEquals(diagnosis.equals(d1),areEqual);
+    }
 
 
 }
