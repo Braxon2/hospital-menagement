@@ -81,4 +81,32 @@ class MedicineTest {
         assertEquals(weightPerPill,medicine.getWeightPerPill());
 
     }
+
+    @Test
+    void testToString(){
+        medicine = new Medicine(1,"Pancef",10);
+        assertTrue(medicine.toString().contains("1"));
+        assertTrue(medicine.toString().contains("Pancef"));
+        assertTrue(medicine.toString().contains("10"));
+
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,Pancef,10,1,Pancef,10,true",
+            "2,Panklav,20,2,Panklav,30,false",
+            "3,Brufen,30,1,Brufen,30,false",
+            "3,Iunoglukan,30,3,Brufen,30,false"
+
+    })
+    void testEquals(long id1, String name1, int weightPerPill1,long id2, String name2, int weightPerPill2,boolean areEqual){
+
+        medicine = new Medicine(id1,name1,weightPerPill1);
+
+        Medicine m = new Medicine(id2,name2,weightPerPill2);
+
+        assertEquals(m.equals(medicine),areEqual);
+
+    }
+
 }
