@@ -195,4 +195,51 @@ class ReportTest {
         return p;
     }
 
+    @ParameterizedTest
+    @CsvSource({
+            "1,sasa, 1:Slavko:2000-01-01:1234567891011:Belgrade:null, Laringitis:1230:H0101, 1:Bore:123456:1;ORL;null:null,nalaz,1,sasa, 1:Slavko:2000-01-01:1234567891011:Belgrade:null, Laringitis:1230:H0101, 1:Bore:123456:1;ORL;null:null,nalaz,true",
+            "2,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,2,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Laringitis:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,false",
+            "2,sasa, 1:Goran:2000-07-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,2,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,false",
+            "2,Momcilo, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,2,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,false",
+            "2,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,3,sasa, 1:Goran:2000-01-01:1234567891011:Belgrade:null, Tinitus:1230:H0101, 1:Zale:123456:1;Dermatologija;null:null,nalaz,false"
+
+
+    })
+    void testEquals(long id,String description, String patientData,String diagnosisData,String doctorData,String clinicalFinding,
+                    long id2,String description2, String patientData2,String diagnosisData2,String doctorData2,String clinicalFinding2,boolean areEquals) throws ParseException {
+
+        Patient patient = convertDataToPatient(patientData);
+        Diagnosis diagnosis = convertDataToDiagnosis(diagnosisData);
+        Doctor doctor = converDataToDoctor(doctorData);
+
+        Report report1 = new Report(id,description,patient,diagnosis,doctor,clinicalFinding);
+
+        Patient patient2 = convertDataToPatient(patientData2);
+        Diagnosis diagnosis2 = convertDataToDiagnosis(diagnosisData2);
+        Doctor doctor2 = converDataToDoctor(doctorData2);
+
+        Report report2 = new Report(id2,description2,patient2,diagnosis2,doctor2,clinicalFinding2);
+
+        assertEquals(report1.equals(report2),areEquals);
+
+
+    }
+
+    @Test
+    void toStringReprot(){
+        Date date = new Date();
+        Patient patient = new Patient("Slavko Petronijevic",date,"1234567891011","Beograd");
+        MedicalSpecial medicalSpecial = new MedicalSpecial(3L,"ORL",null);
+        Doctor doctor = new Doctor(1L,"Vladan Aksentijevic","123456", medicalSpecial,null);
+        Diagnosis diagnosis = new Diagnosis("Laringitis",1203L,"H0101");
+        Report report1 = new Report(1L,"opis",patient,diagnosis,doctor,"nalaz");
+
+        assertTrue(report1.toString().contains("1"));
+        assertTrue(report1.toString().contains("opis"));
+        assertTrue(report1.toString().contains(patient.toString()));
+        assertTrue(report1.toString().contains(diagnosis.toString()));
+        assertTrue(report1.toString().contains(doctor.toString()));
+        assertTrue(report1.toString().contains("nalaz"));
+    }
+
 }
