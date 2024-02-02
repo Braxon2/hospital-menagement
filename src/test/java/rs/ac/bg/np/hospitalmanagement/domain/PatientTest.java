@@ -148,4 +148,49 @@ class PatientTest {
 
     }
 
+    @Test
+    void testToString() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date bornDate = dateFormat.parse("2000-5-23");
+        patient = new Patient(1l,"Slavko",bornDate,"1234567891011","Belgrade",null);
+
+        assertTrue(patient.toString().contains("1"));
+        assertTrue(patient.toString().contains("Slavko"));
+        assertTrue(patient.toString().contains(bornDate.toString()));
+        assertTrue(patient.toString().contains("1234567891011"));
+        assertTrue(patient.toString().contains("Belgrade"));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,Slavko,2000-01-01,1234567891011,Belgrade,null,1,Slavko,2000-01-01,1234567891011,Belgrade,null,true",
+            "2,Darko,1970-05-08,1236547891011,Belgrade,null,2,Darko,1970-05-08,1236547891011,Belgrade,null,true",
+            "2,Goran,1965-09-09,3216547891011,Belgrade,null,2,Darko,1970-05-08,1236547891011,Belgrade,null,false",
+            "2,Uros,1970-05-08,1236547891011,Belgrade,null,2,Marko,1976-05-08,1236547891011,Belgrade,null,false",
+    })
+    void testEquals(long id,String name,String date,String jmbg,String residence,String reports,long id2,String name2,String date2,String jmbg2,String residence2,String reports2,boolean arEqual) throws ParseException {
+
+
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<Report> fake = new ArrayList<>();
+
+        Date bornDate = dateFormat.parse(date);
+        List<Report> reports1 = reports.equals("null")?null:fake;
+
+        Patient p = new Patient(id,name,bornDate,jmbg,residence,reports1);
+
+        List<Report> fake1 = new ArrayList<>();
+
+        Date bornDate2 = dateFormat.parse(date);
+        List<Report> r2 = reports.equals("null")?null:fake1;
+
+        Patient p2 = new Patient(id2,name2,bornDate2,jmbg2,residence2,r2);
+
+        assertEquals(p.equals(p2),arEqual);
+
+
+    }
+
 }
