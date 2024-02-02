@@ -17,7 +17,7 @@ public class MedicalSpecialController {
     private MedicalServiceService medicalServiceService;
 
 
-    @PostMapping("/{msid}/add/{hid}")
+    @PutMapping("/{msid}/add/{hid}")
     public MedicalSpecial addMedSpecToHospital(@PathVariable long msid,@PathVariable long hid) throws Exception {
         return medicalServiceService.connect(msid,hid);
     }

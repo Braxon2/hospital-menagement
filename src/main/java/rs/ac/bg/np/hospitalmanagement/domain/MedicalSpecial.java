@@ -31,6 +31,7 @@ public class MedicalSpecial {
     /**
      * Bolnicu u kojoj se nalazi taj kadar
      */
+    @JsonIgnore
     @ManyToOne//gotovo
     private Hospital hospital;
     /**

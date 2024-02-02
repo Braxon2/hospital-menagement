@@ -78,7 +78,8 @@ public class MedicalServiceService {
         }else{
             h.getMedicalSpecials().add(ms);
         }
-
+        ms.setHospital(h);
+        medicalSpecialRepository.save(ms);
         h.getMedicalSpecials().add(ms);
         hospitalRepository.save(h);
         return ms;
