@@ -161,7 +161,7 @@ public class Recipe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return recid == recipe.recid && doses.equals(recipe.doses) && medicine.equals(recipe.medicine) && report.equals(recipe.report);
+        return recid == recipe.recid && doses.equals(recipe.doses) && medicine.equals(recipe.medicine) && report.getRepid() == recipe.getReport().getRepid();
     }
 
     /**
