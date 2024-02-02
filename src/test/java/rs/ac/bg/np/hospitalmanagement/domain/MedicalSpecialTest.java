@@ -112,4 +112,40 @@ class MedicalSpecialTest {
 
     }
 
+    @Test
+    void testToString(){
+        medicalSpecial = new MedicalSpecial(1L,"ORL",null);
+        assertTrue(medicalSpecial.toString().contains("1"));
+        assertTrue(medicalSpecial.toString().contains("ORL"));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,ORL,null,1,ORL,null,true",
+            "2,xxx,null,1,ORL,null,false",
+            "3,zzz,null,2,zzz,null,false",
+            "3,zzz,null,3,qqq,null,false"
+
+    })
+    void testEquals(long id1, String name1,String membersData1,long id2, String name2,String membersData2,boolean areEqual){
+        Set<Doctor> doctors1 = new HashSet<>();
+        Doctor doctor1 = new Doctor();
+
+        Set<Doctor> result1 = membersData1.equals("null")?null:doctors1;
+
+        medicalSpecial = new MedicalSpecial(id1,name1,result1);
+
+
+        Set<Doctor> doctors2 = new HashSet<>();
+        Doctor doctor2 = new Doctor();
+
+        Set<Doctor> result2 = membersData2.equals("null")?null:doctors2;
+
+        MedicalSpecial medicalSpecial2 = new MedicalSpecial(id2,name2,result2);
+
+        assertEquals(medicalSpecial.equals(medicalSpecial2),areEqual);
+
+
+    }
+
 }
