@@ -53,8 +53,8 @@ public class Diagnosis {
     /**
      * Konstruktor koji inicijalizuje objekat klase Diagnosis sa zadatim vrednostima
      *
-     * @param codeOfDiganosis kod dijagnoze
      * @param name naziv kadra
+     * @param codeOfDiganosis kod dijagnoze
      * @param label sifra dijagnoze
      */
     public Diagnosis(String name, long codeOfDiganosis,String label) {
@@ -211,5 +211,22 @@ public class Diagnosis {
     @Override
     public int hashCode() {
         return Objects.hash(diaId, name, codeOfDiganosis, label);
+    }
+
+    /**
+     *Konstruktor koji inicijalizuje objekat klase Diagnosis sa zadatim vrednostima
+     *
+     * @param diaId id dijagnoze
+     * @param name naziv kadra
+     * @param codeOfDiganosis kod dijagnoze
+     * @param label sifra dijagnoze
+     * @param reports lista izvestaja
+     */
+    public Diagnosis(long diaId, String name, long codeOfDiganosis, String label, List<Report> reports) {
+        this.diaId = diaId;
+        this.name = name;
+        this.codeOfDiganosis = codeOfDiganosis;
+        this.label = label;
+        this.reports = reports;
     }
 }
