@@ -120,4 +120,42 @@ class HospitalTest {
 
     }
 
+    @Test
+    void testToString(){
+        hospital = new Hospital(1,"Narodni","Beograd","Grad",null);
+        assertTrue(hospital.toString().contains("1"));
+        assertTrue(hospital.toString().contains("Narodni"));
+        assertTrue(hospital.toString().contains("Beograd"));
+        assertTrue(hospital.toString().contains("Grad"));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1,Narodni,Beograd,Grad,null,1,Narodni,Beograd,Grad,null,true",
+            "2,xxx,yyy,zzz,null,3,xxx,yyy,zzz,null,false",
+            "2,qqq,yyy,zzz,null,2,xxx,yyy,zzz,null,false",
+            "4,xxx,qqq,zzz,null,4,xxx,yyy,zzz,null,false",
+            "4,xxx,yyy,qqq,null,4,xxx,yyy,zzz,null,false"
+
+    })
+    void testEquals(Long id1,String name1,String addrres1,String city1,String medical1,Long id2,String name2,String addrres2,String city2,String medical2,boolean areEqual){
+
+        MedicalSpecial ms = new MedicalSpecial();
+        MedicalSpecial finalMedspec = medical1.equals("null")?null:ms;
+        Set<MedicalSpecial> sets = new HashSet<>();
+        sets.add(finalMedspec);
+
+        hospital = new Hospital(id1,name1,addrres1,city1,sets);
+
+        MedicalSpecial ms2 = new MedicalSpecial();
+        MedicalSpecial finalMedspec2 = medical2.equals("null")?null:ms;
+        Set<MedicalSpecial> sets2 = new HashSet<>();
+        sets.add(finalMedspec);
+
+        Hospital h = new Hospital(id2,name2,addrres2,city2,sets2);
+
+        assertEquals(h.equals(hospital),areEqual);
+
+    }
+
 }
