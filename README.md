@@ -1,11 +1,14 @@
 # Hospital Management System - Backend
 ![image](https://github.com/user-attachments/assets/c220dfae-b0eb-48cd-b3ce-6262dbead006)
 
-Java
+![image](https://github.com/user-attachments/assets/d2e4a295-3d0d-4e07-8b7a-77631ba7ee7c)
 
-MySQL
 
-JUnit 5
+![image](https://github.com/user-attachments/assets/f5c2784c-3eb0-4f1f-a9d2-9b5701bdaa5b)
+
+
+![image](https://github.com/user-attachments/assets/84faeca8-1934-49b2-993d-dacf456d6d69)
+
 
 Welcome to the Hospital Management System backend project!
 
