@@ -118,6 +118,7 @@ POST /api/prescriptions - Generate a prescription.
 ## Testing
 
 The project includes comprehensive unit tests for domain and service classes using JUnit 5. To run the tests, use the following command:
+
 mvn test
 
 ## Documentation
